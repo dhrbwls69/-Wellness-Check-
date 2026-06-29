@@ -49,26 +49,34 @@
                 </div>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblEmpName">직원 성명 (Full Name) <span class="text-rose-500">*</span></label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblEmpName">직원 성명 (Full Name) *</label>
                         <input type="text" id="empName" placeholder="예: 홍길동" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblEmpPhone">휴대폰 번호 (Phone Number) <span class="text-rose-500">*</span></label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblEmpPhone">휴대폰 번호 (Phone Number) *</label>
                         <input type="tel" id="empPhone" placeholder="예: 01012345678" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblEmpEmail">본인 이메일 (Email) <span class="text-rose-500">*</span></label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblEmpEmail">본인 이메일 (Email) *</label>
                         <input type="email" id="empEmail" placeholder="example@brand.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm">
                     </div>
+                    
+                    <!-- 추가된 지점명 입력 필드 -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblStoreName">지점명 (Store Name)</label>
+                        <input type="text" id="storeName" placeholder="예: 강남점" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm">
+                    </div>
+
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblManagerName">관리자 성함 (Manager Name)</label>
                         <input type="text" id="managerName" placeholder="예: 홍길동 점장" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm">
                     </div>
                 </div>
+                
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 text-xs text-slate-500 leading-relaxed space-y-2">
                     <p class="font-semibold text-teal-800" id="lblInfoTitle">💡 정보 안내 및 절차 고지</p>
-                    <p id="lblInfoDesc1">본 자가진단 응답지는 치폴레 직원들의 건강관리 및 철저한 식품안전관리를 위한 관리 절차입니다.</p>
-                    <p id="lblInfoDesc2">미성년자인 근무자의 경우 법정 대리인의 동의 하에 본 자가진단을 완료하고 매장 및 의료기관의 지시에 따릅니다.</p>
+                    <p id="lblInfoDesc1">본 건강 자가진단은 치폴레 브랜드 직원의 건강을 유지·관리하고, 철저한 식품안전 관리를 위해 반드시 실시해야 하는 절차입니다.</p>
+                    <p id="lblInfoDesc2">직원은 건강 자가진단 문항에 대해 사실에 근거하여 정확하게 작성해야 하며, 진단 결과에 따른 권고사항을 성실히 준수하여야 합니다.</p>
                 </div>
             </section>
 
@@ -152,7 +160,7 @@
                 </div>
                 <div class="space-y-4">
                     <div id="vomitFreqBox" class="hidden">
-                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblVomitCount">증상 시작 이후 총 구토 횟수 <span class="text-rose-500">*</span></label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblVomitCount">증상 시작 이후 총 구토 횟수 *</label>
                         <select id="vomitCount" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm bg-white">
                             <option value="" class="optDefault">선택해 주십시오...</option>
                             <option value="0" class="optNoneVomit">구토 증상 없음 (0회)</option>
@@ -162,7 +170,7 @@
                         </select>
                     </div>
                     <div id="diarrheaFreqBox" class="hidden">
-                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblDiarrheaCount">증상 시작 이후 총 설사 횟수 <span class="text-rose-500">*</span></label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblDiarrheaCount">증상 시작 이후 총 설사 횟수 *</label>
                         <select id="diarrheaCount" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm bg-white">
                             <option value="" class="optDefault">선택해 주십시오...</option>
                             <option value="0" class="optNoneDiarrhea">설사 증상 없음 (0회)</option>
@@ -172,11 +180,11 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblSymptomStartDate">해당 증상이 최초로 시작된 일자 <span class="text-rose-500">*</span></label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblSymptomStartDate">해당 증상이 최초로 시작된 일자 *</label>
                         <input type="date" id="symptomStartDate" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm bg-white">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblLastWorkDate">가장 마지막으로 매장에 출근하여 근무한 날짜 <span class="text-rose-500">*</span></label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5" id="lblLastWorkDate">가장 마지막으로 매장에 출근하여 근무한 날짜 *</label>
                         <input type="date" id="lastWorkDate" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm bg-white">
                     </div>
                 </div>
@@ -229,8 +237,8 @@
         </main>
 
         <footer class="p-6 bg-white border-t border-slate-100 flex space-x-3" id="navigationBar">
-            <button id="btnPrev" onclick="navigateStep(-1)" class="w-1/3 py-3.5 border border-slate-200 text-slate-500 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-colors hidden">이전</button>
-            <button id="btnNext" onclick="navigateStep(1)" class="w-full py-3.5 bg-teal-600 text-white rounded-xl text-sm font-bold hover:bg-teal-700 transition-colors shadow-md shadow-teal-600/10 cursor-pointer">다음</button>
+            <button id="btnPrev" class="w-1/3 py-3.5 border border-slate-200 text-slate-500 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-colors hidden">이전</button>
+            <button id="btnNext" class="w-full py-3.5 bg-teal-600 text-white rounded-xl text-sm font-bold hover:bg-teal-700 transition-colors shadow-md shadow-teal-600/10 cursor-pointer">다음</button>
         </footer>
     </div>
 
@@ -247,10 +255,11 @@
                 lblEmpName: "직원 성명 (Full Name) *", placeholderName: "예: 홍길동",
                 lblEmpPhone: "휴대폰 번호 (Phone Number) *", placeholderPhone: "예: 01012345678",
                 lblEmpEmail: "본인 이메일 (Email) *", placeholderEmail: "example@brand.com",
+                lblStoreName: "지점명 (Store Name)", placeholderStore: "예: 강남점",
                 lblManagerName: "관리자 성함 (Manager Name)", placeholderManager: "예: 홍길동 점장 또는 임원진 성함",
                 lblInfoTitle: "💡 정보 안내 및 절차 고지",
-                lblInfoDesc1: "본 자가진단 항목 중 하나라도 '예'에 해당하는 증상이 나타날 경우, 담당 매니저 및 본사 위생 관리 부서에 즉시 안내됩니다.",
-                lblInfoDesc2: "미성년자인 근무자의 경우 법정 대리인의 동의 하에 본 자가진단을 완료하고 매장 및 의료기관의 지시에 따릅니다.",
+                lblInfoDesc1: "본 건강 자가진단은 치폴레 브랜드 직원의 건강을 유지·관리하고, 철저한 식품안전 관리를 위해 반드시 실시해야 하는 절차입니다.",
+                lblInfoDesc2: "직원은 건강 자가진단 문항에 대해 사실에 근거하여 정확하게 작성해야 하며, 진단 결과에 따른 권고사항을 성실히 준수하여야 합니다.",
                 step2Title: "증상 자가진단", step2Desc: "최근 2일 이내 또는 마지막 근무 이후 아래에 해당하는 증상을 겪은 적이 있으십니까?",
                 lbl_sym_flu: "감기 / 독감 / 코로나 또는 발열 증상 (계절성 알레르기 제외)", lbl_sym_vomit: "구토 및/또는 설사",
                 lbl_sym_jaundice: "황달 (피부나 눈이 노랗게 변하거나 갈색 소변 발생)", lbl_sym_wound: "손·팔 부위에 새로운 수포, 상처 또는 진물",
@@ -278,11 +287,11 @@
                 lblResDate: "진단 일시", lblResName: "직원 성명", lblResSymptom: "감염성 의심 증상",
                 lblRecommendHeader: "안전 조치 권고사항 (Recommendations)",
                 recommendListHTML: `
-                    <li><strong>메신저를 통한 즉시 보고:</strong> 하단의 <strong>[매장 공유용 텍스트 복사]</strong> 버튼을 누르고, 복사된 요약본 내용을 카카오톡, 문자 메시지 등 평소 매장 연락 수단으로 활용하는 메신저를 통해 <strong>점장 또는 부점장 등 매장 관리자에게 즉시 발송하여 보고</strong>해 주시기 바랍니다.</li>
+                    <li><strong>메신저를 통한 즉시 보고:</strong> 하단의 <strong>[매장 관리 보고용 텍스트 복사]</strong> 버튼을 누르고, 복사된 요약본 내용을 카카오톡, 문자 메시지 등 평소 매장 연락 수단으로 활용하는 메신저를 통해 <strong>점장 또는 부점장 등 매장 관리자에게 즉시 발송하여 보고</strong>해 주시기 바랍니다.</li>
                     <li><strong>의료기관 신속 방문:</strong> 정확한 진단과 빠른 쾌유를 위해 지체없이 가까운 내과, 이비인후과, 가정의학과 등 전문 의료기관에 신속히 방문하여 진료를 받아 주시기 바랍니다.</li>
                     <li><strong>개인 위생 가이드 준수:</strong> 손 씻기와 손 소독제 사용 등 개인 위생을 더욱 철저히 지켜 주시고, 증상 전파를 막기 위해 마스크 착용을 준수하여 주시기 바랍니다.</li>
                 `,
-                btnCopyText: "매장 공유용 텍스트 복사", btnResetText: "처음으로 돌아가기",
+                btnCopyText: "매장 관리 보고용 텍스트 복사", btnResetText: "처음으로 돌아가기",
                 resFooterNotice: "※ 텍스트 복사 후 점장 및 부점장 등 관리자 메신저로 즉시 발송해 주시기 바랍니다."
             },
             EN: {
@@ -291,10 +300,11 @@
                 lblEmpName: "Employee Full Name *", placeholderName: "e.g. Jane Doe",
                 lblEmpPhone: "Phone Number *", placeholderPhone: "e.g. 01012345678",
                 lblEmpEmail: "Your Email Address *", placeholderEmail: "example@brand.com",
+                lblStoreName: "Store Name (Optional)", placeholderStore: "e.g. Gangnam Store",
                 lblManagerName: "Manager Name (Optional)", placeholderManager: "e.g. John Doe (Store Manager)",
                 lblInfoTitle: "💡 Guidelines and Policy Notice",
-                lblInfoDesc1: "If any symptom is selected as 'Yes', the manager and the headquarters hygiene department will be notified immediately.",
-                lblInfoDesc2: "For minors, this assessment must be completed with the consent of a legal guardian, following store instructions.",
+                lblInfoDesc1: "This wellness check is a mandatory procedure to maintain and manage the health of Chipotle brand employees and ensure strict food safety management.",
+                lblInfoDesc2: "Employees must accurately fill out the wellness check questions based on facts, and faithfully comply with recommendations based on the assessment results.",
                 step2Title: "Symptom Check", step2Desc: "Have you experienced any of these symptoms in the past 2 days or since your last shift?",
                 lbl_sym_flu: "Cold / Flu / COVID-19 or Fever symptoms (excluding seasonal allergies)", lbl_sym_vomit: "Vomiting and/or Diarrhea",
                 lbl_sym_jaundice: "Jaundice (yellow skin/eyes or dark brown urine)", lbl_sym_wound: "New blisters, open sores, or weeping cuts on hands/arms",
@@ -331,7 +341,7 @@
             }
         };
 
-        const formState = { name: '', phone: '', email: '', managerEmail: '', symptoms: [], vomitCount: '', diarrheaCount: '', startDate: '', lastWorkDate: '', subjective: '', submissionDate: null };
+        const formState = { name: '', phone: '', email: '', storeName: '', managerEmail: '', symptoms: [], vomitCount: '', diarrheaCount: '', startDate: '', lastWorkDate: '', subjective: '' };
 
         function safeSetText(id, text) {
             const el = document.getElementById(id);
@@ -341,11 +351,6 @@
         function safeSetHTML(id, html) {
             const el = document.getElementById(id);
             if (el) el.innerHTML = html;
-        }
-
-        function safeSetPlaceholder(id, placeholder) {
-            const el = document.getElementById(id);
-            if (el) el.placeholder = placeholder;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -358,6 +363,10 @@
                 }
             });
 
+            // 수동으로 네비게이션바 버튼 핸들러 등록
+            document.getElementById('btnPrev').addEventListener('click', (e) => { e.preventDefault(); navigateStep(-1); });
+            document.getElementById('btnNext').addEventListener('click', (e) => { e.preventDefault(); navigateStep(1); });
+
             initSymptomInteraction();
             updateStepView();
             changeLanguage('KO');
@@ -366,31 +375,35 @@
         function changeLanguage(lang) {
             currentLang = lang;
             const d = translations[lang];
-            if (!d) return;
 
-            document.getElementById('btnLangKO').className = lang === 'KO' ? "px-3 py-1 rounded-full font-medium transition-all duration-200 bg-white text-teal-700 shadow-sm cursor-pointer select-none" : "px-3 py-1 rounded-full font-medium transition-all duration-200 text-slate-400 hover:text-slate-600 cursor-pointer select-none";
-            document.getElementById('btnLangEN').className = lang === 'EN' ? "px-3 py-1 rounded-full font-medium transition-all duration-200 bg-white text-teal-700 shadow-sm cursor-pointer select-none" : "px-3 py-1 rounded-full font-medium transition-all duration-200 text-slate-400 hover:text-slate-600 cursor-pointer select-none";
+            const btnKO = document.getElementById('btnLangKO');
+            const btnEN = document.getElementById('btnLangEN');
+            if (btnKO && btnEN) {
+                btnKO.className = lang === 'KO' ? "px-3 py-1 rounded-full font-medium transition-all duration-200 bg-white text-teal-700 shadow-sm cursor-pointer select-none" : "px-3 py-1 rounded-full font-medium transition-all duration-200 text-slate-400 hover:text-slate-600 cursor-pointer select-none";
+                btnEN.className = lang === 'EN' ? "px-3 py-1 rounded-full font-medium transition-all duration-200 bg-white text-teal-700 shadow-sm cursor-pointer select-none" : "px-3 py-1 rounded-full font-medium transition-all duration-200 text-slate-400 hover:text-slate-600 cursor-pointer select-none";
+            }
 
-            // Safe UI updates (prevents execution halt on missing components)
             safeSetText('headerTitle', d.headerTitle);
             safeSetText('headerSubtitle', d.headerSubtitle);
             safeSetText('step1Title', d.step1Title);
             safeSetText('step1Desc', d.step1Desc);
-
-            const lblEmpName = document.getElementById('lblEmpName');
-            if (lblEmpName) lblEmpName.innerHTML = d.lblEmpName.replace('*', '<span class="text-rose-500">*</span>');
-            safeSetPlaceholder('empName', d.placeholderName);
-
-            const lblEmpPhone = document.getElementById('lblEmpPhone');
-            if (lblEmpPhone) lblEmpPhone.innerHTML = d.lblEmpPhone.replace('*', '<span class="text-rose-500">*</span>');
-            safeSetPlaceholder('empPhone', d.placeholderPhone);
-
-            const lblEmpEmail = document.getElementById('lblEmpEmail');
-            if (lblEmpEmail) lblEmpEmail.innerHTML = d.lblEmpEmail.replace('*', '<span class="text-rose-500">*</span>');
-            safeSetPlaceholder('empEmail', d.placeholderEmail);
+            
+            safeSetHTML('lblEmpName', d.lblEmpName.replace('*', '<span class="text-rose-500">*</span>'));
+            const empNameInput = document.getElementById('empName'); if (empNameInput) empNameInput.placeholder = d.placeholderName;
+            
+            safeSetHTML('lblEmpPhone', d.lblEmpPhone.replace('*', '<span class="text-rose-500">*</span>'));
+            const empPhoneInput = document.getElementById('empPhone'); if (empPhoneInput) empPhoneInput.placeholder = d.placeholderPhone;
+            
+            safeSetHTML('lblEmpEmail', d.lblEmpEmail.replace('*', '<span class="text-rose-500">*</span>'));
+            const empEmailInput = document.getElementById('empEmail'); if (empEmailInput) empEmailInput.placeholder = d.placeholderEmail;
+            
+            // 지점명 사전 번역 연동
+            safeSetText('lblStoreName', d.lblStoreName);
+            const storeNameInput = document.getElementById('storeName'); if (storeNameInput) storeNameInput.placeholder = d.placeholderStore;
 
             safeSetText('lblManagerName', d.lblManagerName);
-            safeSetPlaceholder('managerName', d.placeholderManager);
+            const managerNameInput = document.getElementById('managerName'); if (managerNameInput) managerNameInput.placeholder = d.placeholderManager;
+            
             safeSetText('lblInfoTitle', d.lblInfoTitle);
             safeSetText('lblInfoDesc1', d.lblInfoDesc1);
             safeSetText('lblInfoDesc2', d.lblInfoDesc2);
@@ -405,34 +418,32 @@
             safeSetText('lbl_sym_other_contagious', d.lbl_sym_other_contagious);
             safeSetText('lbl_sym_care', d.lbl_sym_care);
             safeSetText('lblSubjective', d.lblSubjective);
-            safeSetPlaceholder('subjectiveSymptom', d.placeholderSubjective);
+            const subjInput = document.getElementById('subjectiveSymptom'); if (subjInput) subjInput.placeholder = d.placeholderSubjective;
             safeSetText('lbl_sym_none', d.lbl_sym_none);
 
             safeSetText('step3Title', d.step3Title);
             safeSetText('step3Desc', d.step3Desc);
+            safeSetHTML('lblVomitCount', d.lblVomitCount.replace('*', '<span class="text-rose-500">*</span>'));
+            safeSetHTML('lblDiarrheaCount', d.lblDiarrheaCount.replace('*', '<span class="text-rose-500">*</span>'));
+            safeSetHTML('lblSymptomStartDate', d.lblSymptomStartDate.replace('*', '<span class="text-rose-500">*</span>'));
+            safeSetHTML('lblLastWorkDate', d.lblLastWorkDate.replace('*', '<span class="text-rose-500">*</span>'));
 
-            const lblVomitCount = document.getElementById('lblVomitCount');
-            if (lblVomitCount) lblVomitCount.innerHTML = d.lblVomitCount.replace('*', '<span class="text-rose-500">*</span>');
-            const lblDiarrheaCount = document.getElementById('lblDiarrheaCount');
-            if (lblDiarrheaCount) lblDiarrheaCount.innerHTML = d.lblDiarrheaCount.replace('*', '<span class="text-rose-500">*</span>');
-
-            const lblSymptomStartDate = document.getElementById('lblSymptomStartDate');
-            if (lblSymptomStartDate) lblSymptomStartDate.innerHTML = d.lblSymptomStartDate.replace('*', '<span class="text-rose-500">*</span>');
-            const lblLastWorkDate = document.getElementById('lblLastWorkDate');
-            if (lblLastWorkDate) lblLastWorkDate.innerHTML = d.lblLastWorkDate.replace('*', '<span class="text-rose-500">*</span>');
+            document.querySelectorAll('.optDefault').forEach(el => el.innerText = d.optDefault);
+            document.querySelectorAll('.optNoneVomit').forEach(el => el.innerText = d.optNoneVomit);
+            document.querySelectorAll('.optNoneDiarrhea').forEach(el => el.innerText = d.optNoneDiarrhea);
+            document.querySelectorAll('.optFew').forEach(el => el.innerText = d.optFew);
+            document.querySelectorAll('.optMid').forEach(el => el.innerText = d.optMid);
+            document.querySelectorAll('.optSevere').forEach(el => el.innerText = d.optSevere);
 
             safeSetText('step4Title', d.step4Title);
             safeSetText('step4Desc', d.step4Desc);
             safeSetHTML('lblAgreeTerms', d.lblAgreeTerms);
-
-            const lblPrivacyHeader = document.getElementById('lblPrivacyHeader');
-            if (lblPrivacyHeader) lblPrivacyHeader.innerHTML = `<i class="fa-solid fa-shield-halved mr-1.5"></i> ${d.lblPrivacyHeader}`;
+            safeSetHTML('lblPrivacyHeader', `<i class="fa-solid fa-shield-halved mr-1.5"></i> ${d.lblPrivacyHeader}`);
             safeSetText('lblPrivacyBody', d.lblPrivacyBody);
 
             safeSetText('btnAlertClose', d.btnAlertClose);
             safeSetText('btnPrev', d.btnPrev);
 
-            // Result Screen Labels Translation
             safeSetText('resultTitle', d.resTitle);
             safeSetText('resultSubtitle', d.resSubtitle);
             safeSetText('lblResDate', d.lblResDate);
@@ -446,18 +457,8 @@
 
             if (isSubmitted) {
                 renderLiveSymptoms();
-                // Dynamically update submission date format according to chosen language locale
-                if (formState.submissionDate) {
-                    const localFormat = currentLang === 'KO' ? 'ko-KR' : 'en-US';
-                    const dateString = formState.submissionDate.toLocaleDateString(localFormat, { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric', 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                    });
-                    safeSetText('resDate', dateString);
-                }
+                const localFormat = lang === 'KO' ? 'ko-KR' : 'en-US';
+                safeSetText('resDate', new Date().toLocaleDateString(localFormat, { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }));
             } else {
                 updateStepView();
             }
@@ -471,41 +472,48 @@
                 input.addEventListener('change', (e) => {
                     if (e.target.id === 'sym_none' && e.target.checked) {
                         symptomInputs.forEach(other => { if (other.id !== 'sym_none') other.checked = false; });
-                        document.getElementById('subjectiveSymptom').value = '';
+                        const subjInput = document.getElementById('subjectiveSymptom');
+                        if (subjInput) subjInput.value = '';
                     } else if (e.target.id !== 'sym_none' && e.target.checked) {
-                        noneInput.checked = false;
+                        if (noneInput) noneInput.checked = false;
                     }
                 });
             });
         }
 
         function checkConditionalSymptomFlow() {
-            const hasVomit = document.getElementById('sym_vomit').checked;
-            document.getElementById('vomitFreqBox').className = hasVomit ? "" : "hidden";
-            document.getElementById('diarrheaFreqBox').className = hasVomit ? "" : "hidden";
+            const vomitCheck = document.getElementById('sym_vomit');
+            const hasVomit = vomitCheck ? vomitCheck.checked : false;
+            
+            const vBox = document.getElementById('vomitFreqBox'); if (vBox) vBox.className = hasVomit ? "" : "hidden";
+            const dBox = document.getElementById('diarrheaFreqBox'); if (dBox) dBox.className = hasVomit ? "" : "hidden";
+            
             if (!hasVomit) {
-                document.getElementById('vomitCount').value = "";
-                document.getElementById('diarrheaCount').value = "";
+                const vc = document.getElementById('vomitCount'); if (vc) vc.value = "";
+                const dc = document.getElementById('diarrheaCount'); if (dc) dc.value = "";
             }
         }
 
         function validateStep(step) {
             const d = translations[currentLang];
             if (step === 1) {
-                const name = document.getElementById('empName').value.trim();
-                const phone = document.getElementById('empPhone').value.trim();
-                const email = document.getElementById('empEmail').value.trim();
+                const name = document.getElementById('empName') ? document.getElementById('empName').value.trim() : "";
+                const phone = document.getElementById('empPhone') ? document.getElementById('empPhone').value.trim() : "";
+                const email = document.getElementById('empEmail') ? document.getElementById('empEmail').value.trim() : "";
+                
                 if (!name || !phone || !email) { showCustomAlert("warning", d.alertWarnTitle, d.valMissingInfo); return false; }
                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showCustomAlert("warning", d.alertWarnTitle, d.valEmailError); return false; }
                 
                 formState.name = name;
                 formState.phone = phone;
                 formState.email = email;
-                formState.managerEmail = document.getElementById('managerName').value.trim();
+                formState.storeName = document.getElementById('storeName') ? document.getElementById('storeName').value.trim() : "";
+                formState.managerEmail = document.getElementById('managerName') ? document.getElementById('managerName').value.trim() : "";
             } 
             else if (step === 2) {
                 const checkedSymptoms = Array.from(document.querySelectorAll('input[name="symptoms"]:checked'));
-                const subjVal = document.getElementById('subjectiveSymptom').value.trim();
+                const subjEl = document.getElementById('subjectiveSymptom');
+                const subjVal = subjEl ? subjEl.value.trim() : "";
                 if (checkedSymptoms.length === 0 && subjVal.length === 0) { showCustomAlert("warning", d.alertWarnTitle, d.valSymptomError); return false; }
                 
                 formState.symptoms = checkedSymptoms.map(el => el.value);
@@ -513,19 +521,26 @@
                 checkConditionalSymptomFlow();
             } 
             else if (step === 3) {
-                const hasVomit = document.getElementById('sym_vomit').checked;
-                const start = document.getElementById('symptomStartDate').value;
-                const lastWork = document.getElementById('lastWorkDate').value;
-                if (hasVomit && (!document.getElementById('vomitCount').value || !document.getElementById('diarrheaCount').value)) { showCustomAlert("warning", d.alertWarnTitle, d.valDetailError); return false; }
+                const vomitCheck = document.getElementById('sym_vomit');
+                const hasVomit = vomitCheck ? vomitCheck.checked : false;
+                const start = document.getElementById('symptomStartDate') ? document.getElementById('symptomStartDate').value : "";
+                const lastWork = document.getElementById('lastWorkDate') ? document.getElementById('lastWorkDate').value : "";
+                
+                if (hasVomit) {
+                    const vc = document.getElementById('vomitCount') ? document.getElementById('vomitCount').value : "";
+                    const dc = document.getElementById('diarrheaCount') ? document.getElementById('diarrheaCount').value : "";
+                    if (!vc || !dc) { showCustomAlert("warning", d.alertWarnTitle, d.valDetailError); return false; }
+                }
                 if (!start || !lastWork) { showCustomAlert("warning", d.alertWarnTitle, d.valDateError); return false; }
                 
-                formState.vomitCount = document.getElementById('vomitCount').value;
-                formState.diarrheaCount = document.getElementById('diarrheaCount').value;
+                formState.vomitCount = document.getElementById('vomitCount') ? document.getElementById('vomitCount').value : "";
+                formState.diarrheaCount = document.getElementById('diarrheaCount') ? document.getElementById('diarrheaCount').value : "";
                 formState.startDate = start;
                 formState.lastWorkDate = lastWork;
             } 
             else if (step === 4) {
-                if (!document.getElementById('chk_agree').checked) { showCustomAlert("warning", d.alertWarnTitle, d.valAgreeError); return false; }
+                const agreeCheck = document.getElementById('chk_agree');
+                if (agreeCheck && !agreeCheck.checked) { showCustomAlert("warning", d.alertWarnTitle, d.valAgreeError); return false; }
             }
             return true;
         }
@@ -544,12 +559,21 @@
         function updateStepView() {
             const d = translations[currentLang];
             document.querySelectorAll('.step-panel').forEach(panel => panel.classList.remove('active'));
-            document.getElementById(`step${currentStep}`).classList.add('active');
-            document.getElementById('progressBar').style.width = `${(currentStep / totalSteps) * 100}%`;
+            
+            const activePanel = document.getElementById(`step${currentStep}`);
+            if (activePanel) activePanel.classList.add('active');
+            
+            const pBar = document.getElementById('progressBar');
+            if (pBar) pBar.style.width = `${(currentStep / totalSteps) * 100}%`;
 
-            document.getElementById('btnPrev').className = currentStep === 1 ? "hidden" : "w-1/3 py-3.5 border border-slate-200 text-slate-500 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-colors";
-            document.getElementById('btnNext').className = currentStep === 1 ? "w-full py-3.5 bg-teal-600 text-white rounded-xl text-sm font-bold hover:bg-teal-700 transition-colors cursor-pointer" : "w-2/3 py-3.5 bg-teal-600 text-white rounded-xl text-sm font-bold hover:bg-teal-700 transition-colors cursor-pointer";
-            document.getElementById('btnNext').innerText = currentStep === totalSteps ? d.btnSubmit : d.btnNext;
+            const btnPrev = document.getElementById('btnPrev');
+            if (btnPrev) btnPrev.className = currentStep === 1 ? "hidden" : "w-1/3 py-3.5 border border-slate-200 text-slate-500 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-colors cursor-pointer";
+            
+            const btnNext = document.getElementById('btnNext');
+            if (btnNext) {
+                btnNext.className = currentStep === 1 ? "w-full py-3.5 bg-teal-600 text-white rounded-xl text-sm font-bold hover:bg-teal-700 transition-colors cursor-pointer" : "w-2/3 py-3.5 bg-teal-600 text-white rounded-xl text-sm font-bold hover:bg-teal-700 transition-colors cursor-pointer";
+                btnNext.innerText = currentStep === totalSteps ? d.btnSubmit : d.btnNext;
+            }
         }
 
         function renderLiveSymptoms() {
@@ -565,45 +589,52 @@
 
         function submitWellnessCheck() {
             isSubmitted = true;
-            formState.submissionDate = new Date(); // Save timestamp
-            document.getElementById('navigationBar').classList.add('hidden');
+            const navBar = document.getElementById('navigationBar'); if (navBar) navBar.classList.add('hidden');
             document.querySelectorAll('.step-panel').forEach(panel => panel.classList.remove('active'));
-            document.getElementById('resultScreen').classList.add('active');
-            document.getElementById('progressBar').style.width = "100%";
+            
+            const rScreen = document.getElementById('resultScreen'); if (rScreen) rScreen.classList.add('active');
+            const pBar = document.getElementById('progressBar'); if (pBar) pBar.style.width = "100%";
 
-            // Apply all translated assets safely to result views
-            changeLanguage(currentLang);
+            const localFormat = currentLang === 'KO' ? 'ko-KR' : 'en-US';
+            safeSetText('resDate', new Date().toLocaleDateString(localFormat, { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }));
             safeSetText('resName', formState.name);
+            renderLiveSymptoms();
         }
 
         function buildReportText() {
             const isHealthy = formState.symptoms.includes('none') && !formState.subjective;
+            const storeText = formState.storeName ? formState.storeName : (currentLang === 'KO' ? "미기입" : "Not Entered");
             const managerText = formState.managerEmail ? formState.managerEmail : (currentLang === 'KO' ? "미기입" : "Not Entered");
-            const symptomsText = document.getElementById('resSymptom') ? document.getElementById('resSymptom').innerText : '';
-            const resDateText = document.getElementById('resDate') ? document.getElementById('resDate').innerText : '';
+            const symptomsText = document.getElementById('resSymptom') ? document.getElementById('resSymptom').innerText : "";
+            const resDateText = document.getElementById('resDate') ? document.getElementById('resDate').innerText : "";
             
             if (currentLang === 'KO') {
-                return `[직원 웰니스 자가진단 보고서]\n진단일자: ${resDateText}\n직원성명: ${formState.name}\n연락처: ${formState.phone}\n의심증상: ${isHealthy ? '없음 (정상)' : symptomsText}\n보고대상: ${managerText}\n조치사항: 가까운 전문 병원 내원 상담 권고를 받았으며, 카카오톡/문자메시지 등을 통해 점장/부점장 등의 관리자에게 즉시 결과를 전송하도록 안내받았습니다.`;
+                return `[직원 웰니스 자가진단 보고서]\n진단일자: ${resDateText}\n소속지점: ${storeText}\n직원성명: ${formState.name}\n연락처: ${formState.phone}\n의심증상: ${isHealthy ? '없음 (정상)' : symptomsText}\n보고대상: ${managerText}\n조치사항: 가까운 전문 병원 내원 상담 권고를 받았으며, 카카오톡/문자메시지 등을 통해 점장/부점장 등의 관리자에게 즉시 결과를 전송하도록 안내받았습니다.`;
             } else {
-                return `[Employee Wellness Self-Assessment Report]\nAssessment Date: ${resDateText}\nEmployee Name: ${formState.name}\nPhone: ${formState.phone}\nSuspected Symptoms: ${isHealthy ? 'None (Healthy)' : symptomsText}\nReport To: ${managerText}\nInstructions: Directed to visit a local clinic for professional diagnosis, and instructed to share these results immediately with the Store Manager or Assistant Manager via messenger apps.`;
+                return `[Employee Wellness Self-Assessment Report]\nAssessment Date: ${resDateText}\nStore Name: ${storeText}\nEmployee Name: ${formState.name}\nPhone: ${formState.phone}\nSuspected Symptoms: ${isHealthy ? 'None (Healthy)' : symptomsText}\nReport To: ${managerText}\nInstructions: Directed to visit a local clinic for professional diagnosis, and instructed to share these results immediately with the Store Manager or Assistant Manager via messenger apps.`;
             }
         }
 
         function resetForm() {
             isSubmitted = false;
-            formState.submissionDate = null;
-            document.getElementById('empName').value = ''; document.getElementById('empPhone').value = '';
-            document.getElementById('empEmail').value = ''; document.getElementById('managerName').value = '';
-            document.getElementById('subjectiveSymptom').value = '';
+            document.getElementById('empName').value = ''; 
+            document.getElementById('empPhone').value = '';
+            document.getElementById('empEmail').value = ''; 
+            document.getElementById('storeName').value = ''; 
+            document.getElementById('managerName').value = '';
+            const subjInput = document.getElementById('subjectiveSymptom'); if (subjInput) subjInput.value = '';
+            
             document.querySelectorAll('input[name="symptoms"]').forEach(input => input.checked = false);
-            document.getElementById('vomitCount').value = ''; document.getElementById('diarrheaCount').value = '';
-            document.getElementById('symptomStartDate').value = ''; document.getElementById('lastWorkDate').value = '';
-            document.getElementById('chk_agree').checked = false;
+            const vc = document.getElementById('vomitCount'); if (vc) vc.value = ''; 
+            const dc = document.getElementById('diarrheaCount'); if (dc) dc.value = '';
+            const sd = document.getElementById('symptomStartDate'); if (sd) sd.value = ''; 
+            const lw = document.getElementById('lastWorkDate'); if (lw) lw.value = '';
+            const ac = document.getElementById('chk_agree'); if (ac) ac.checked = false;
 
             currentStep = 1;
-            document.getElementById('resultScreen').classList.remove('active');
-            document.getElementById('navigationBar').className = "p-6 bg-white border-t border-slate-100 flex space-x-3";
-            changeLanguage(currentLang);
+            const rScreen = document.getElementById('resultScreen'); if (rScreen) rScreen.classList.remove('active');
+            const navBar = document.getElementById('navigationBar'); if (navBar) navBar.className = "p-6 bg-white border-t border-slate-100 flex space-x-3";
+            updateStepView();
         }
 
         function copyToClipboard() {
@@ -620,20 +651,22 @@
         }
 
         function showCustomAlert(type, title, msg) {
-            document.getElementById('alertTitle').innerText = title;
-            document.getElementById('alertMsg').innerText = msg;
+            safeSetText('alertTitle', title);
+            safeSetText('alertMsg', msg);
             const icon = document.getElementById('alertIcon');
-            if (type === "success") {
-                icon.className = "w-12 h-12 rounded-full flex items-center justify-center mx-auto text-2xl bg-teal-50 text-teal-600";
-                icon.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
-            } else {
-                icon.className = "w-12 h-12 rounded-full flex items-center justify-center mx-auto text-2xl bg-rose-50 text-rose-600";
-                icon.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>`;
+            if (icon) {
+                if (type === "success") {
+                    icon.className = "w-12 h-12 rounded-full flex items-center justify-center mx-auto text-2xl bg-teal-50 text-teal-600";
+                    icon.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+                } else {
+                    icon.className = "w-12 h-12 rounded-full flex items-center justify-center mx-auto text-2xl bg-rose-50 text-rose-600";
+                    icon.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>`;
+                }
             }
-            document.getElementById('customAlert').classList.remove('hidden');
+            const cAlert = document.getElementById('customAlert'); if (cAlert) cAlert.classList.remove('hidden');
         }
 
-        function closeAlert() { document.getElementById('customAlert').classList.add('hidden'); }
+        function closeAlert() { const cAlert = document.getElementById('customAlert'); if (cAlert) cAlert.classList.add('hidden'); }
     </script>
 </body>
 </html>
