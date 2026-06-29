@@ -129,7 +129,6 @@
                         </label>
                     </div>
                     
-                    <!-- 주관식 입력 필드 -->
                     <div class="pt-1">
                         <label class="block text-[11px] font-bold text-slate-500 mb-1" id="lblSubjective">기타 증상 직접 입력 (Optional)</label>
                         <input type="text" id="subjectiveSymptom" placeholder="리스트에 없는 증상이 있다면 직접 적어주세요." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-xs bg-slate-50/50">
@@ -279,11 +278,11 @@
                 lblResDate: "진단 일시", lblResName: "직원 성명", lblResSymptom: "감염성 의심 증상",
                 lblRecommendHeader: "안전 조치 권고사항 (Recommendations)",
                 recommendListHTML: `
-                    <li><strong>메신저를 통한 즉시 보고:</strong> 하단의 <strong>[매장 관리 보고용 텍스트 복사]</strong> 버튼을 누르고, 복사된 요약본 내용을 카카오톡, 문자 메시지 등 평소 매장 연락 수단으로 활용하는 메신저를 통해 <strong>점장 또는 부점장 등 매장 관리자에게 즉시 발송하여 보고</strong>해 주시기 바랍니다.</li>
+                    <li><strong>메신저를 통한 즉시 보고:</strong> 하단의 <strong>[매장 공유용 텍스트 복사]</strong> 버튼을 누르고, 복사된 요약본 내용을 카카오톡, 문자 메시지 등 평소 매장 연락 수단으로 활용하는 메신저를 통해 <strong>점장 또는 부점장 등 매장 관리자에게 즉시 발송하여 보고</strong>해 주시기 바랍니다.</li>
                     <li><strong>의료기관 신속 방문:</strong> 정확한 진단과 빠른 쾌유를 위해 지체없이 가까운 내과, 이비인후과, 가정의학과 등 전문 의료기관에 신속히 방문하여 진료를 받아 주시기 바랍니다.</li>
                     <li><strong>개인 위생 가이드 준수:</strong> 손 씻기와 손 소독제 사용 등 개인 위생을 더욱 철저히 지켜 주시고, 증상 전파를 막기 위해 마스크 착용을 준수하여 주시기 바랍니다.</li>
                 `,
-                btnCopyText: "매장 관리 보고용 텍스트 복사", btnResetText: "처음으로 돌아가기",
+                btnCopyText: "매장 공유용 텍스트 복사", btnResetText: "처음으로 돌아가기",
                 resFooterNotice: "※ 텍스트 복사 후 점장 및 부점장 등 관리자 메신저로 즉시 발송해 주시기 바랍니다."
             },
             EN: {
@@ -332,7 +331,22 @@
             }
         };
 
-        const formState = { name: '', phone: '', email: '', managerEmail: '', symptoms: [], vomitCount: '', diarrheaCount: '', startDate: '', lastWorkDate: '', subjective: '' };
+        const formState = { name: '', phone: '', email: '', managerEmail: '', symptoms: [], vomitCount: '', diarrheaCount: '', startDate: '', lastWorkDate: '', subjective: '', submissionDate: null };
+
+        function safeSetText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
+
+        function safeSetHTML(id, html) {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = html;
+        }
+
+        function safeSetPlaceholder(id, placeholder) {
+            const el = document.getElementById(id);
+            if (el) el.placeholder = placeholder;
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('btnLangKO').addEventListener('click', (e) => { e.preventDefault(); changeLanguage('KO'); });
@@ -352,69 +366,98 @@
         function changeLanguage(lang) {
             currentLang = lang;
             const d = translations[lang];
+            if (!d) return;
 
             document.getElementById('btnLangKO').className = lang === 'KO' ? "px-3 py-1 rounded-full font-medium transition-all duration-200 bg-white text-teal-700 shadow-sm cursor-pointer select-none" : "px-3 py-1 rounded-full font-medium transition-all duration-200 text-slate-400 hover:text-slate-600 cursor-pointer select-none";
             document.getElementById('btnLangEN').className = lang === 'EN' ? "px-3 py-1 rounded-full font-medium transition-all duration-200 bg-white text-teal-700 shadow-sm cursor-pointer select-none" : "px-3 py-1 rounded-full font-medium transition-all duration-200 text-slate-400 hover:text-slate-600 cursor-pointer select-none";
 
-            document.getElementById('headerTitle').innerText = d.headerTitle;
-            document.getElementById('headerSubtitle').innerText = d.headerSubtitle;
-            document.getElementById('step1Title').innerText = d.step1Title;
-            document.getElementById('step1Desc').innerText = d.step1Desc;
-            document.getElementById('lblEmpName').innerHTML = d.lblEmpName.replace('*', '<span class="text-rose-500">*</span>');
-            document.getElementById('empName').placeholder = d.placeholderName;
-            document.getElementById('lblEmpPhone').innerHTML = d.lblEmpPhone.replace('*', '<span class="text-rose-500">*</span>');
-            document.getElementById('empPhone').placeholder = d.placeholderPhone;
-            document.getElementById('lblEmpEmail').innerHTML = d.lblEmpEmail.replace('*', '<span class="text-rose-500">*</span>');
-            document.getElementById('empEmail').placeholder = d.placeholderEmail;
-            document.getElementById('lblManagerName').innerText = d.lblManagerName;
-            document.getElementById('managerName').placeholder = d.placeholderManager;
-            document.getElementById('lblInfoTitle').innerText = d.lblInfoTitle;
-            document.getElementById('lblInfoDesc1').innerText = d.lblInfoDesc1;
-            document.getElementById('lblInfoDesc2').innerText = d.lblInfoDesc2;
+            // Safe UI updates (prevents execution halt on missing components)
+            safeSetText('headerTitle', d.headerTitle);
+            safeSetText('headerSubtitle', d.headerSubtitle);
+            safeSetText('step1Title', d.step1Title);
+            safeSetText('step1Desc', d.step1Desc);
 
-            document.getElementById('step2Title').innerText = d.step2Title;
-            document.getElementById('step2Desc').innerText = d.step2Desc;
-            document.getElementById('lbl_sym_flu').innerText = d.lbl_sym_flu;
-            document.getElementById('lbl_sym_vomit').innerText = d.lbl_sym_vomit;
-            document.getElementById('lbl_sym_jaundice').innerText = d.lbl_sym_jaundice;
-            document.getElementById('lbl_sym_wound').innerText = d.lbl_sym_wound;
-            document.getElementById('lbl_sym_covid').innerText = d.lbl_sym_covid;
-            document.getElementById('lbl_sym_other_contagious').innerText = d.lbl_sym_other_contagious;
-            document.getElementById('lbl_sym_care').innerText = d.lbl_sym_care;
-            document.getElementById('lblSubjective').innerText = d.lblSubjective;
-            document.getElementById('subjectiveSymptom').placeholder = d.placeholderSubjective;
-            document.getElementById('lbl_sym_none').innerText = d.lbl_sym_none;
+            const lblEmpName = document.getElementById('lblEmpName');
+            if (lblEmpName) lblEmpName.innerHTML = d.lblEmpName.replace('*', '<span class="text-rose-500">*</span>');
+            safeSetPlaceholder('empName', d.placeholderName);
 
-            document.getElementById('step3Title').innerText = d.step3Title;
-            document.getElementById('step3Desc').innerText = d.step3Desc;
-            document.getElementById('lblVomitCount').innerHTML = d.lblVomitCount.replace('*', '<span class="text-rose-500">*</span>');
-            document.getElementById('lblDiarrheaCount').innerHTML = d.lblDiarrheaCount.replace('*', '<span class="text-rose-500">*</span>');
+            const lblEmpPhone = document.getElementById('lblEmpPhone');
+            if (lblEmpPhone) lblEmpPhone.innerHTML = d.lblEmpPhone.replace('*', '<span class="text-rose-500">*</span>');
+            safeSetPlaceholder('empPhone', d.placeholderPhone);
 
-            document.getElementById('lblSymptomStartDate').innerHTML = d.lblSymptomStartDate.replace('*', '<span class="text-rose-500">*</span>');
-            document.getElementById('lblLastWorkDate').innerHTML = d.lblLastWorkDate.replace('*', '<span class="text-rose-500">*</span>');
+            const lblEmpEmail = document.getElementById('lblEmpEmail');
+            if (lblEmpEmail) lblEmpEmail.innerHTML = d.lblEmpEmail.replace('*', '<span class="text-rose-500">*</span>');
+            safeSetPlaceholder('empEmail', d.placeholderEmail);
 
-            document.getElementById('step4Title').innerText = d.step4Title;
-            document.getElementById('step4Desc').innerText = d.step4Desc;
-            document.getElementById('lblAgreeTerms').innerHTML = d.lblAgreeTerms;
-            document.getElementById('lblPrivacyHeader').innerHTML = `<i class="fa-solid fa-shield-halved mr-1.5"></i> ${d.lblPrivacyHeader}`;
-            document.getElementById('lblPrivacyBody').innerText = d.lblPrivacyBody;
+            safeSetText('lblManagerName', d.lblManagerName);
+            safeSetPlaceholder('managerName', d.placeholderManager);
+            safeSetText('lblInfoTitle', d.lblInfoTitle);
+            safeSetText('lblInfoDesc1', d.lblInfoDesc1);
+            safeSetText('lblInfoDesc2', d.lblInfoDesc2);
 
-            document.getElementById('btnAlertClose').innerText = d.btnAlertClose;
-            document.getElementById('btnPrev').innerText = d.btnPrev;
+            safeSetText('step2Title', d.step2Title);
+            safeSetText('step2Desc', d.step2Desc);
+            safeSetText('lbl_sym_flu', d.lbl_sym_flu);
+            safeSetText('lbl_sym_vomit', d.lbl_sym_vomit);
+            safeSetText('lbl_sym_jaundice', d.lbl_sym_jaundice);
+            safeSetText('lbl_sym_wound', d.lbl_sym_wound);
+            safeSetText('lbl_sym_covid', d.lbl_sym_covid);
+            safeSetText('lbl_sym_other_contagious', d.lbl_sym_other_contagious);
+            safeSetText('lbl_sym_care', d.lbl_sym_care);
+            safeSetText('lblSubjective', d.lblSubjective);
+            safeSetPlaceholder('subjectiveSymptom', d.placeholderSubjective);
+            safeSetText('lbl_sym_none', d.lbl_sym_none);
 
-            document.getElementById('resultTitle').innerText = d.resTitle;
-            document.getElementById('resultSubtitle').innerText = d.resSubtitle;
-            document.getElementById('lblResDate').innerText = d.lblResDate;
-            document.getElementById('lblResName').innerText = d.lblResName;
-            document.getElementById('lblResSymptom').innerText = d.lblResSymptom;
-            document.getElementById('lblRecommendHeader').innerText = d.lblRecommendHeader;
-            document.getElementById('lblRecommendList').innerHTML = d.recommendListHTML;
-            document.getElementById('btnCopyText').innerText = d.btnCopyText;
-            document.getElementById('btnResetText').innerText = d.btnResetText;
-            document.getElementById('resFooterNotice').innerText = d.resFooterNotice;
+            safeSetText('step3Title', d.step3Title);
+            safeSetText('step3Desc', d.step3Desc);
+
+            const lblVomitCount = document.getElementById('lblVomitCount');
+            if (lblVomitCount) lblVomitCount.innerHTML = d.lblVomitCount.replace('*', '<span class="text-rose-500">*</span>');
+            const lblDiarrheaCount = document.getElementById('lblDiarrheaCount');
+            if (lblDiarrheaCount) lblDiarrheaCount.innerHTML = d.lblDiarrheaCount.replace('*', '<span class="text-rose-500">*</span>');
+
+            const lblSymptomStartDate = document.getElementById('lblSymptomStartDate');
+            if (lblSymptomStartDate) lblSymptomStartDate.innerHTML = d.lblSymptomStartDate.replace('*', '<span class="text-rose-500">*</span>');
+            const lblLastWorkDate = document.getElementById('lblLastWorkDate');
+            if (lblLastWorkDate) lblLastWorkDate.innerHTML = d.lblLastWorkDate.replace('*', '<span class="text-rose-500">*</span>');
+
+            safeSetText('step4Title', d.step4Title);
+            safeSetText('step4Desc', d.step4Desc);
+            safeSetHTML('lblAgreeTerms', d.lblAgreeTerms);
+
+            const lblPrivacyHeader = document.getElementById('lblPrivacyHeader');
+            if (lblPrivacyHeader) lblPrivacyHeader.innerHTML = `<i class="fa-solid fa-shield-halved mr-1.5"></i> ${d.lblPrivacyHeader}`;
+            safeSetText('lblPrivacyBody', d.lblPrivacyBody);
+
+            safeSetText('btnAlertClose', d.btnAlertClose);
+            safeSetText('btnPrev', d.btnPrev);
+
+            // Result Screen Labels Translation
+            safeSetText('resultTitle', d.resTitle);
+            safeSetText('resultSubtitle', d.resSubtitle);
+            safeSetText('lblResDate', d.lblResDate);
+            safeSetText('lblResName', d.lblResName);
+            safeSetText('lblResSymptom', d.lblResSymptom);
+            safeSetText('lblRecommendHeader', d.lblRecommendHeader);
+            safeSetHTML('lblRecommendList', d.recommendListHTML);
+            safeSetText('btnCopyText', d.btnCopyText);
+            safeSetText('btnResetText', d.btnResetText);
+            safeSetText('resFooterNotice', d.resFooterNotice);
 
             if (isSubmitted) {
                 renderLiveSymptoms();
+                // Dynamically update submission date format according to chosen language locale
+                if (formState.submissionDate) {
+                    const localFormat = currentLang === 'KO' ? 'ko-KR' : 'en-US';
+                    const dateString = formState.submissionDate.toLocaleDateString(localFormat, { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    });
+                    safeSetText('resDate', dateString);
+                }
             } else {
                 updateStepView();
             }
@@ -509,7 +552,6 @@
             document.getElementById('btnNext').innerText = currentStep === totalSteps ? d.btnSubmit : d.btnNext;
         }
 
-        // 증상 항목을 정리하여 화면에 보여주는 함수
         function renderLiveSymptoms() {
             const d = translations[currentLang];
             const transMap = { 'flu': d.lbl_sym_flu, 'vomit_diarrhea': d.lbl_sym_vomit, 'jaundice': d.lbl_sym_jaundice, 'wound': d.lbl_sym_wound, 'covid_positive': d.lbl_sym_covid, 'other_contagious': d.lbl_sym_other_contagious, 'caregiver': d.lbl_sym_care, 'none': d.lbl_sym_none };
@@ -518,36 +560,38 @@
             if(formState.subjective) {
                 symptomsList.push(`${formState.subjective}`);
             }
-            document.getElementById('resSymptom').innerText = symptomsList.join(', ');
+            safeSetText('resSymptom', symptomsList.join(', '));
         }
 
         function submitWellnessCheck() {
             isSubmitted = true;
+            formState.submissionDate = new Date(); // Save timestamp
             document.getElementById('navigationBar').classList.add('hidden');
             document.querySelectorAll('.step-panel').forEach(panel => panel.classList.remove('active'));
             document.getElementById('resultScreen').classList.add('active');
             document.getElementById('progressBar').style.width = "100%";
 
-            const localFormat = currentLang === 'KO' ? 'ko-KR' : 'en-US';
-            document.getElementById('resDate').innerText = new Date().toLocaleDateString(localFormat, { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-            document.getElementById('resName').innerText = formState.name;
-            renderLiveSymptoms();
+            // Apply all translated assets safely to result views
+            changeLanguage(currentLang);
+            safeSetText('resName', formState.name);
         }
 
         function buildReportText() {
             const isHealthy = formState.symptoms.includes('none') && !formState.subjective;
             const managerText = formState.managerEmail ? formState.managerEmail : (currentLang === 'KO' ? "미기입" : "Not Entered");
-            const symptomsText = document.getElementById('resSymptom').innerText;
+            const symptomsText = document.getElementById('resSymptom') ? document.getElementById('resSymptom').innerText : '';
+            const resDateText = document.getElementById('resDate') ? document.getElementById('resDate').innerText : '';
             
             if (currentLang === 'KO') {
-                return `[직원 웰니스 자가진단 보고서]\n진단일자: ${document.getElementById('resDate').innerText}\n직원성명: ${formState.name}\n연락처: ${formState.phone}\n의심증상: ${isHealthy ? '없음 (정상)' : symptomsText}\n보고대상: ${managerText}\n조치사항: 가까운 전문 병원 내원 상담 권고를 받았으며, 카카오톡/문자메시지 등을 통해 점장/부점장 등의 관리자에게 즉시 결과를 전송하도록 안내받았습니다.`;
+                return `[직원 웰니스 자가진단 보고서]\n진단일자: ${resDateText}\n직원성명: ${formState.name}\n연락처: ${formState.phone}\n의심증상: ${isHealthy ? '없음 (정상)' : symptomsText}\n보고대상: ${managerText}\n조치사항: 가까운 전문 병원 내원 상담 권고를 받았으며, 카카오톡/문자메시지 등을 통해 점장/부점장 등의 관리자에게 즉시 결과를 전송하도록 안내받았습니다.`;
             } else {
-                return `[Employee Wellness Self-Assessment Report]\nAssessment Date: ${document.getElementById('resDate').innerText}\nEmployee Name: ${formState.name}\nPhone: ${formState.phone}\nSuspected Symptoms: ${isHealthy ? 'None (Healthy)' : symptomsText}\nReport To: ${managerText}\nInstructions: Directed to visit a local clinic for professional diagnosis, and instructed to share these results immediately with the Store Manager or Assistant Manager via messenger apps.`;
+                return `[Employee Wellness Self-Assessment Report]\nAssessment Date: ${resDateText}\nEmployee Name: ${formState.name}\nPhone: ${formState.phone}\nSuspected Symptoms: ${isHealthy ? 'None (Healthy)' : symptomsText}\nReport To: ${managerText}\nInstructions: Directed to visit a local clinic for professional diagnosis, and instructed to share these results immediately with the Store Manager or Assistant Manager via messenger apps.`;
             }
         }
 
         function resetForm() {
             isSubmitted = false;
+            formState.submissionDate = null;
             document.getElementById('empName').value = ''; document.getElementById('empPhone').value = '';
             document.getElementById('empEmail').value = ''; document.getElementById('managerName').value = '';
             document.getElementById('subjectiveSymptom').value = '';
@@ -559,7 +603,7 @@
             currentStep = 1;
             document.getElementById('resultScreen').classList.remove('active');
             document.getElementById('navigationBar').className = "p-6 bg-white border-t border-slate-100 flex space-x-3";
-            updateStepView();
+            changeLanguage(currentLang);
         }
 
         function copyToClipboard() {
